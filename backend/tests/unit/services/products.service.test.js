@@ -14,7 +14,7 @@ describe('Test - Products Service:', function () {
     const responseObj = { status: null, data: productsModelResponse };
 
     expect(productsServiceResponse).to.be.deep.equal(responseObj);
-    });
+  });
 
   it('should return a product by id if productId exist', async function () {
     sinon.stub(productsService, 'getById').resolves(productsByIdMock);
