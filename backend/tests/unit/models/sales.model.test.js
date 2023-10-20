@@ -28,12 +28,7 @@ describe('Test - Sales Model:', function () {
     const saleId = 9999;
     const salesById = await salesModel.getById(saleId);
 
-    const responseObj = {
-      status: 'HTTP_NOT_FOUND',
-      data: { message: 'Sale not found' },
-    };
-
-    expect(salesById).to.be.deep.equal(responseObj);
+    expect(salesById).to.be.deep.equal(undefined);
   });
 
   afterEach(function () {

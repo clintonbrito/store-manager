@@ -4,7 +4,7 @@ const connection = require('../../../src/models/connection');
 const productsModel = require('../../../src/models/products.model');
 const { productsMock, productsByIdMock } = require('../mocks/products.mock');
 
-describe('Test products model', function () {
+describe('Test - Products Model', function () {
   it('should return all products', async function () {
     sinon.stub(connection, 'execute').resolves([productsMock]);
 
@@ -16,7 +16,7 @@ describe('Test products model', function () {
   it('should return a product by id if productId exist', async function () {
     sinon.stub(connection, 'execute').resolves([[productsByIdMock]]);
 
-    const productId = 1;
+    const productId = 2;
     const productsById = await productsModel.getById(productId);
 
     expect(productsById).to.be.deep.equal(productsByIdMock);
@@ -28,10 +28,7 @@ describe('Test products model', function () {
     const productId = 9999;
     const productsById = await productsModel.getById(productId);
 
-    expect(productsById).to.be.deep.equal({
-      status: 'HTTP_NOT_FOUND',
-      data: { message: 'Product not found' },
-    });
+    expect(productsById).to.be.deep.equal(undefined);
   });
 
   afterEach(function () {

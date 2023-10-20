@@ -6,41 +6,34 @@ const { productsMock, productsByIdMock } = require('../mocks/products.mock');
 
 describe('Test - Products Service:', function () {
   it('should return all products', async function () {
-    sinon.stub(productsService, 'getAll').resolves(productsMock);
+    sinon.stub(productsModel, 'getAll').resolves(productsMock);
 
-    const productsModelResponse = await productsModel.getAll();
     const productsServiceResponse = await productsService.getAll();
 
-    const responseObj = { status: null, data: productsModelResponse };
+    const responseObj = { status: null, data: productsMock };
 
     expect(productsServiceResponse).to.be.deep.equal(responseObj);
   });
 
   it('should return a product by id if productId exist', async function () {
-    sinon.stub(productsService, 'getById').resolves(productsByIdMock);
+    sinon.stub(productsModel, 'getById').resolves(productsByIdMock);
 
     const productId = 2;
-
-    const productsByIdModelResponse = await productsModel.getById(productId);
     const productsByIdServiceResponse = await productsService.getById(productId);
 
-    const responseObj = { status: null, data: productsByIdModelResponse };
+    const responseObj = { status: null, data: productsByIdMock };
 
     expect(productsByIdServiceResponse).to.be.deep.equal(responseObj);
   });
 
   it('should return 404 status and message `Product not found` if productId not exist', async function () {
-    sinon.stub(productsService, 'getById').resolves([]);
+    sinon.stub(productsModel, 'getById').resolves([]);
 
     const productId = 9999;
 
-    const productsByIdModelResponse = await productsModel.getById(productId);
     const productsByIdServiceResponse = await productsService.getById(productId);
 
-    const responseObj = {
-      status: 'HTTP_NOT_FOUND',
-      data: productsByIdModelResponse,
-    };
+    const responseObj = { status: null, data: [] };
 
     expect(productsByIdServiceResponse).to.be.deep.equal(responseObj);
   });

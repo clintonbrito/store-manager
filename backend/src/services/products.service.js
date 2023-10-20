@@ -7,6 +7,7 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const product = await productsModel.getById(id);
+  // console.log(product);
   if (!product) {
     return {
       status: 'HTTP_NOT_FOUND',
