@@ -2,7 +2,7 @@ const productsModel = require('../models/products.model');
 
 const getAll = async () => {
   const products = await productsModel.getAll();
-  return { status: null, data: products };
+  return { status: 200, data: products };
 };
 
 const getById = async (id) => {
@@ -10,22 +10,23 @@ const getById = async (id) => {
   // console.log(product);
   if (!product) {
     return {
-      status: 'HTTP_NOT_FOUND',
-      data: { message: 'Product not found' },
+      status: 404,
+      message: 'Product not found',
     };
   }
-  return { status: null, data: product };
+  return { status: 200, data: product };
 };
 
 const create = async (name) => {
   const product = await productsModel.create(name);
+  console.log(product);
   if (product.status) {
     return {
-      status: 'HTTP_INVALID_VALUE',
-      data: { message: product.data.message },
+      status: 422,
+      message: 'Failed to create product: invalid data or data conflict',
     };
   }
-  return { status: null, data: product };
+  return { status: 201, data: product };
 };
 
 module.exports = {

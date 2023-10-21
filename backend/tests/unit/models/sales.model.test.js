@@ -14,7 +14,7 @@ describe('Test - Sales Model:', function () {
   });
 
   it('should return a sale by id if saleId exist', async function () {
-    sinon.stub(connection, 'execute').resolves([[salesByIdMock]]);
+    sinon.stub(connection, 'execute').resolves([salesByIdMock]);
 
     const saleId = 1;
     const salesById = await salesModel.getById(saleId);
@@ -23,7 +23,7 @@ describe('Test - Sales Model:', function () {
   });
 
   it('should return 404 status and message `Sale not found` if saleId not exist', async function () {
-    sinon.stub(connection, 'execute').resolves([[]]);
+    sinon.stub(connection, 'execute').resolves([]);
 
     const saleId = 9999;
     const salesById = await salesModel.getById(saleId);

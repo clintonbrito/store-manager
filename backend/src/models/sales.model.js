@@ -1,8 +1,6 @@
 const camelize = require('camelize');
 const connection = require('./connection');
 
-// O resultado de getAll deve ser ordenado de forma crescente pelo campo saleId, em caso de empate, ordenar também de forma crescente pelo campo productId;
-
 const getAll = async () => {
   const query = `SELECT SP.sale_id, S.date, SP.product_id, SP.quantity
     FROM sales AS S
@@ -14,13 +12,13 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const query = `SELECT SP.sale_id, S.date, SP.product_id, SP.quantity
+  const query = `SELECT S.date, SP.product_id, SP.quantity
     FROM sales AS S
     INNER JOIN sales_products AS SP
     ON S.id = SP.sale_id
     WHERE SP.sale_id = ?
     ORDER BY sale_id, product_id;`;
-  const [[saleId]] = await connection.execute(query, [id]);
+  const [saleId] = await connection.execute(query, [id]);
   return camelize(saleId);
 };
 

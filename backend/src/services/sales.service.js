@@ -2,28 +2,30 @@ const salesModel = require('../models/sales.model');
 
 const getAll = async () => {
   const sales = await salesModel.getAll();
-  return { status: null, data: sales };
+  // console.log(sales);
+  return { status: 200, data: sales };
 };
 
 const getById = async (id) => {
   const sale = await salesModel.getById(id);
-  if (!sale) {
+  // console.log(sale);
+  if (!sale || (Array.isArray(sale) && sale.length === 0)) {
     return {
-      status: 'HTTP_NOT_FOUND',
-      data: { message: 'Sale not found' },
+      status: 404,
+      message: 'Sale not found',
     };
   }
-  return { status: null, data: sale };
+  return { status: 200, data: sale };
 };
 
 const create = async (productId, quantity) => {
   const saleId = await salesModel.createSaleId();
   const sale = await salesModel.create({ productId, quantity }, saleId);
 
-  if (sale.status) {
+  if (sale.status !== undefined) {
     return {
-      status: 'HTTP_INVALID_VALUE',
-      data: { message: sale.data.message },
+      status: 422,
+      message: 'Failed to create sale: invalid data or data conflict',
     };
   }
 
