@@ -19,7 +19,7 @@ const getById = async (id) => {
 
 const create = async (name) => {
   const product = await productsModel.create(name);
-  console.log(product);
+  // console.log(product);
   if (product.status) {
     return {
       status: 422,
