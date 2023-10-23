@@ -18,12 +18,13 @@ const getById = async (id) => {
   return { status: 200, data: sale };
 };
 
-const create = async (productId, quantity) => {
+const create = async (reqBody) => {
   const saleId = await salesModel.createSaleId();
 
-  const sale = await salesModel.create(productId, quantity, saleId);
-
-  console.log(sale);
+  const sale = reqBody.map(async (eachProductSold) => {
+    const { productId, quantity } = eachProductSold;
+    await salesModel.create(saleId, productId, quantity);
+  });
 
   if (sale.status !== undefined) {
     return {
@@ -32,7 +33,6 @@ const create = async (productId, quantity) => {
     };
   }
 
-  // return { status: 201, data: sale };
   return { status: 201,
     data: {
       id: saleId,

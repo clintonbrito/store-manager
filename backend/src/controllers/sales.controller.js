@@ -18,9 +18,19 @@ const getById = async (req, res) => {
   return res.status(sale.status).json(sale.data);
 };
 
+// const create = async (req, res) => {
+//   const allSaleArray = req.body;
+//   const sale = await salesService.create(productId, quantity);
+//   if (sale.message) {
+//     return res.status(sale.status).json(sale.message);
+//   }
+//   return res.status(sale.status).json(sale.data);
+// };
+
 const create = async (req, res) => {
-  const [{ productId, quantity }] = req.body; // como espalhar todos os objetos aqui dentro?
-  const sale = await salesService.create(productId, quantity);
+  const arrayWithProducts = req.body;
+  const sale = await salesService.create(arrayWithProducts);
+
   if (sale.message) {
     return res.status(sale.status).json(sale.message);
   }
