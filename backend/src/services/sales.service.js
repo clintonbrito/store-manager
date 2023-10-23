@@ -20,7 +20,10 @@ const getById = async (id) => {
 
 const create = async (productId, quantity) => {
   const saleId = await salesModel.createSaleId();
-  const sale = await salesModel.create({ productId, quantity }, saleId);
+
+  const sale = await salesModel.create(productId, quantity, saleId);
+
+  console.log(sale);
 
   if (sale.status !== undefined) {
     return {
@@ -29,7 +32,13 @@ const create = async (productId, quantity) => {
     };
   }
 
-  return { status: null, data: sale };
+  // return { status: 201, data: sale };
+  return { status: 201,
+    data: {
+      id: saleId,
+      itemsSold: sale,
+    },
+  };
 };
 
 module.exports = {
