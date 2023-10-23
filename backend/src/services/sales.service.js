@@ -21,10 +21,10 @@ const getById = async (id) => {
 const create = async (reqBody) => {
   const saleId = await salesModel.createSaleId();
 
-  const sale = reqBody.map(async (eachProductSold) => {
+  const sale = await Promise.all(reqBody.map(async (eachProductSold) => {
     const { productId, quantity } = eachProductSold;
-    await salesModel.create(saleId, productId, quantity);
-  });
+    return salesModel.create(saleId, productId, quantity);
+  }));
 
   if (sale.status !== undefined) {
     return {
@@ -36,7 +36,7 @@ const create = async (reqBody) => {
   return { status: 201,
     data: {
       id: saleId,
-      itemsSold: sale,
+      itemsSold: reqBody,
     },
   };
 };
