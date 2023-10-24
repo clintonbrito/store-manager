@@ -23,6 +23,7 @@ const create = async (reqBody) => {
 
   const sale = await Promise.all(reqBody.map(async (eachProductSold) => {
     const { productId, quantity } = eachProductSold;
+
     return salesModel.create(saleId, productId, quantity);
   }));
 

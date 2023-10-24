@@ -13,4 +13,4 @@ const validateProducts = (req, res, next) => {
   next();
 };
 
-module.exports = validateProducts;
+module.exports = { validateProducts };

@@ -41,9 +41,20 @@ const create = async (saleId, productId, quantity) => {
   return camelize(newSale);
 };
 
+const productIdExistsInDB = async (productId) => {
+  const query = `SELECT id
+  FROM products
+  WHERE id = ?`;
+
+  const [product] = await connection.execute(query, [productId]);
+
+  return product.length !== 0;
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   createSaleId,
+  productIdExistsInDB,
 };
