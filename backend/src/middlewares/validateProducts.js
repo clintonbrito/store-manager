@@ -1,3 +1,5 @@
+const { productIdExistsInDB } = require('../models/products.model');
+
 const validateProducts = (req, res, next) => {
   const { name } = req.body;
   const MIN_NAME_LENGTH = 5;
@@ -13,4 +15,19 @@ const validateProducts = (req, res, next) => {
   next();
 };
 
-module.exports = { validateProducts };
+const checkIfProductIdExists = async (req, res, next) => {
+  const { id } = req.params;
+
+  const productIdExists = await productIdExistsInDB(id);
+
+  if (!productIdExists) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+
+  next();
+};
+
+module.exports = {
+  validateProducts,
+  checkIfProductIdExists,
+};

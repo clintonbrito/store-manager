@@ -4,7 +4,9 @@ const salesController = require('../controllers/sales.controller');
 const { validateSales } = require('../middlewares');
 
 salesRouter.get('/', salesController.getAll);
+
 salesRouter.get('/:id', salesController.getById);
+
 salesRouter.post(
   '/',
   validateSales.validateProductId,

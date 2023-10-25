@@ -42,9 +42,7 @@ const create = async (saleId, productId, quantity) => {
 };
 
 const productIdExistsInDB = async (productId) => {
-  const query = `SELECT id
-  FROM products
-  WHERE id = ?`;
+  const query = 'SELECT id FROM products WHERE id = ?';
 
   const [product] = await connection.execute(query, [productId]);
 

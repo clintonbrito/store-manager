@@ -19,8 +19,25 @@ const create = async (name) => {
   return { id: insertId, name };
 };
 
+const update = async (name, id) => {
+  const query = 'UPDATE products SET name = ? WHERE id = ?';
+  await connection.execute(query, [name, id]);
+  return { id: Number(id), name };
+};
+
+const productIdExistsInDB = async (productId) => {
+  const query = 'SELECT id FROM products WHERE id = ?';
+
+  const [product] = await connection.execute(query, [productId]);
+  // console.log('Primeiro console: ', product);
+
+  return product.length !== 0;
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  update,
+  productIdExistsInDB,
 };

@@ -17,10 +17,24 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   const { name } = req.body;
   const product = await productsService.create(name);
-  // console.log(product);
+
   if (product.message) {
     return res.status(product.status).json({ message: product.message });
   }
+
+  return res.status(product.status).json(product.data);
+};
+
+const update = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  const product = await productsService.update(name, id);
+
+  if (product.message) {
+    return res.status(product.status).json({ message: product.message });
+  }
+
   return res.status(product.status).json(product.data);
 };
 
@@ -28,4 +42,5 @@ module.exports = {
   getAll,
   getById,
   create,
+  update,
 };

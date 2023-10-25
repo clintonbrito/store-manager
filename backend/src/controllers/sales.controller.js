@@ -18,15 +18,6 @@ const getById = async (req, res) => {
   return res.status(sale.status).json(sale.data);
 };
 
-// const create = async (req, res) => {
-//   const allSaleArray = req.body;
-//   const sale = await salesService.create(productId, quantity);
-//   if (sale.message) {
-//     return res.status(sale.status).json(sale.message);
-//   }
-//   return res.status(sale.status).json(sale.data);
-// };
-
 const create = async (req, res) => {
   const arrayWithProducts = req.body;
   const sale = await salesService.create(arrayWithProducts);
