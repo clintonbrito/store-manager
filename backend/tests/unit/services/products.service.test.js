@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
-const { productsMock, productsByIdMock } = require('../mocks/products.mock');
+const { productsMock, getProductByIdFromModel } = require('../mocks/productsModel.mock');
 
 describe('Test - Products Service:', function () {
   it('should return all products', async function () {
@@ -16,12 +16,12 @@ describe('Test - Products Service:', function () {
   });
 
   it('should return a product by id if productId exist', async function () {
-    sinon.stub(productsModel, 'getById').resolves(productsByIdMock);
+    sinon.stub(productsModel, 'getById').resolves(getProductByIdFromModel);
 
     const productId = 2;
     const productsByIdServiceResponse = await productsService.getById(productId);
 
-    const responseObj = { status: 200, data: productsByIdMock };
+    const responseObj = { status: 200, data: getProductByIdFromModel };
 
     expect(productsByIdServiceResponse).to.be.deep.equal(responseObj);
   });

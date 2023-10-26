@@ -1,4 +1,4 @@
-const productsMock = [
+const getAllProductsFromDB = [[
   {
     id: 1,
     name: 'Martelo de Thor',
@@ -11,9 +11,14 @@ const productsMock = [
     id: 3,
     name: 'Escudo do CapitÃ£o AmÃ©rica',
   },
-];
+]];
 
-const productsByIdMock = {
+const getProductByIdFromDB = [[{
+  id: 2,
+  name: 'Traje de encolhimento',
+}]];
+
+const getProductByIdFromModel = {
   id: 2,
   name: 'Traje de encolhimento',
 };
@@ -23,8 +28,16 @@ const productsByIdNotFoundMock = {
   data: { message: 'Product not found' },
 };
 
+const productCreatedFromDB = [
+  {
+    insertId: 4,
+  },
+];
+
 module.exports = {
-  productsMock,
-  productsByIdMock,
+  getAllProductsFromDB,
+  getProductByIdFromDB,
   productsByIdNotFoundMock,
+  productCreatedFromDB,
+  getProductByIdFromModel,
 };

@@ -10,6 +10,7 @@ const getAll = async () => {
 const getById = async (id) => {
   const query = 'SELECT * FROM products WHERE id = ?';
   const [[productId]] = await connection.execute(query, [id]);
+  // console.log(productId);
   return camelize(productId);
 };
 
