@@ -28,16 +28,27 @@ const productsByIdNotFoundMock = {
   data: { message: 'Product not found' },
 };
 
-const productCreatedFromDB = [
-  {
-    insertId: 4,
-  },
-];
+const productCreatedFromModel = {
+  id: 4,
+  name: 'Pílulas de Nanicolina',
+};
+
+const productCreatedFromDB = [{ insertId: 4 }];
+
+const productUpdatedFromDB = {
+  id: 3,
+  name: 'Pílulas de Nanicolina',
+};
+
+const productInvalidFromModel = false;
 
 module.exports = {
   getAllProductsFromDB,
   getProductByIdFromDB,
   productsByIdNotFoundMock,
-  productCreatedFromDB,
+  productCreatedFromModel,
   getProductByIdFromModel,
+  productCreatedFromDB,
+  productUpdatedFromDB,
+  productInvalidFromModel,
 };

@@ -1,4 +1,4 @@
-const { productIdExistsInDB } = require('../models/products.model');
+const productsModel = require('../models/products.model');
 
 const validateProducts = (req, res, next) => {
   const { name } = req.body;
@@ -18,7 +18,7 @@ const validateProducts = (req, res, next) => {
 const checkIfProductIdExists = async (req, res, next) => {
   const { id } = req.params;
 
-  const productIdExists = await productIdExistsInDB(id);
+  const productIdExists = await productsModel.productIdExistsInDB(id);
 
   if (!productIdExists) {
     return res.status(404).json({ message: 'Product not found' });

@@ -2,7 +2,12 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 const connection = require('../../../src/models/connection');
 const productsModel = require('../../../src/models/products.model');
-const { getAllProductsFromDB, getProductByIdFromDB, productCreatedFromDB } = require('../mocks/productsModel.mock');
+const {
+  getAllProductsFromDB,
+  getProductByIdFromDB,
+  productCreatedFromDB,
+  productUpdatedFromDB,
+} = require('../mocks/productsModel.mock');
 
 describe('Test - Products Model:', function () {
   it('should return all products', async function () {
@@ -40,7 +45,7 @@ describe('Test - Products Model:', function () {
     expect(productsById).to.be.deep.equal(undefined);
   });
 
-  it('should return an object with 201 status after created a new product', async function () {
+  it('should return an object with `id` and `name` after created a new product', async function () {
     sinon.stub(connection, 'execute').resolves(productCreatedFromDB);
 
     const productName = 'Pílulas de Nanicolina';
@@ -52,6 +57,22 @@ describe('Test - Products Model:', function () {
     };
 
     expect(productCreated).to.be.deep.equal(expectedResult);
+  });
+
+  it('should return an object with `id` and `name` after update an existing product', async function () {
+    sinon.stub(connection, 'execute').resolves(productUpdatedFromDB);
+
+    const name = 'Pílulas de Nanicolina';
+    const id = 3;
+
+    const productUpdated = await productsModel.update(name, id);
+
+    const expectedResult = {
+      id: 3,
+      name,
+    };
+
+    expect(productUpdated).to.be.deep.equal(expectedResult);
   });
 
   afterEach(function () {

@@ -17,12 +17,16 @@ const getById = async (id) => {
 const create = async (name) => {
   const query = 'INSERT INTO products (name) VALUES (?)';
   const [{ insertId }] = await connection.execute(query, [name]);
+  // const resultQuery = await connection.execute(query, [name]);
+  // console.log(resultQuery);
   return { id: insertId, name };
 };
 
 const update = async (name, id) => {
   const query = 'UPDATE products SET name = ? WHERE id = ?';
   await connection.execute(query, [name, id]);
+  // const resultQuery = await connection.execute(query, [name, id]);
+
   return { id: Number(id), name };
 };
 
