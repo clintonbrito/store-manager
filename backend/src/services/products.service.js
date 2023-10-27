@@ -8,12 +8,11 @@ const getAll = async () => {
 const getById = async (id) => {
   const product = await productsModel.getById(id);
   // console.log(product);
+
   if (!product) {
-    return {
-      status: 404,
-      message: 'Product not found',
-    };
+    return { status: 404, message: 'Product not found' };
   }
+
   return { status: 200, data: product };
 };
 
@@ -26,7 +25,7 @@ const create = async (name) => {
 
 const update = async (name, id) => {
   const product = await productsModel.update(name, id);
-  console.log(product);
+  // console.log(product);
 
   return { status: 200, data: product };
 };

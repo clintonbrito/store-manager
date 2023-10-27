@@ -1,13 +1,13 @@
 const sinon = require('sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+
+chai.use(sinonChai);
 const { expect } = require('chai');
+
 const connection = require('../../../src/models/connection');
 const productsModel = require('../../../src/models/products.model');
-const {
-  getAllProductsFromDB,
-  getProductByIdFromDB,
-  productCreatedFromDB,
-  productUpdatedFromDB,
-} = require('../mocks/productsModel.mock');
+const { getAllProductsFromDB, getProductByIdFromDB, productCreatedFromDB, productUpdatedFromDB } = require('../mocks/productsModel.mock');
 
 describe('Test - Products Model:', function () {
   it('should return all products', async function () {

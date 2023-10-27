@@ -1,5 +1,10 @@
 const sinon = require('sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+
+chai.use(sinonChai);
 const { expect } = require('chai');
+
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
 const { getProductByIdFromModel, getAllProductsFromDB, productCreatedFromModel } = require('../mocks/productsModel.mock');

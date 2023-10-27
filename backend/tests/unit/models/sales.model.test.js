@@ -1,12 +1,13 @@
 const sinon = require('sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+
+chai.use(sinonChai);
 const { expect } = require('chai');
+
 const connection = require('../../../src/models/connection');
-// const createSaleId = require('../../../src/models/sales.model');
 const salesModel = require('../../../src/models/sales.model');
-const {
-  salesMock,
-  salesByIdMock,
-} = require('../mocks/salesModel.mock');
+const { salesMock, salesByIdMock } = require('../mocks/salesModel.mock');
 
 describe('Test - Sales Model:', function () {
   it('should return all sales', async function () {

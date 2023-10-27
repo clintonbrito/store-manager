@@ -3,6 +3,12 @@ const productInvalidFromModel = {
   name: 'Laço da Verdade',
 };
 
+const productUpdatedOkFromModel = {
+  id: 3,
+  name: 'Laço da Verdade',
+};
+
 module.exports = {
   productInvalidFromModel,
+  productUpdatedOkFromModel,
 };
