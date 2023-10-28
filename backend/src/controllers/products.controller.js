@@ -1,8 +1,8 @@
 const productsService = require('../services/products.service');
 
 const getAll = async (_req, res) => {
-  const products = await productsService.getAll();
-  return res.status(products.status).json(products.data);
+  const { status, data } = await productsService.getAll(); // descontruí para acessar diretamente as propriedades do objeto que retorna a camada service.
+  return res.status(status).json(data);
 };
 
 const getById = async (req, res) => {

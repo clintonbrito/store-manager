@@ -11,8 +11,23 @@ const { productInvalidFromModel } = require('../mocks/productsModel.mock');
 const { productUpdatedOkFromModel } = require('../mocks/productsService.mock');
 
 describe('Test - Products Middleware:', function () {
+  // it('should return an object with status 400 after trying to create a product with invalid `name`', async function () {
+  //   sinon.stub(productsModel, 'productIdExistsInDB').resolves(productWithInvalidNameFromModel);
+
+  //   const name = 'Asdf';
+  //   const req = { body: { name } };
+  //   const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+  //   const next = sinon.stub();
+  
+  //   await validateProducts.validateProducts(req, res, next);
+  //   // console.log(productUpdated);
+  //   const expectedResult = { status: 400, data: { message: 'Name is required' } };
+
+  //   expect(res.status).to.have.been.calledWith(expectedResult.status);
+  //   expect(res.json).to.have.been.calledWith(expectedResult.data);
+  // });
+
   it('should return an object with status 404 after trying to update an invalid product', async function () {
-    // estou confundindo toda hora o que colocar dentro do "resolves"
     sinon.stub(productsModel, 'productIdExistsInDB').resolves(productInvalidFromModel);
 
     const id = 9999999999;
