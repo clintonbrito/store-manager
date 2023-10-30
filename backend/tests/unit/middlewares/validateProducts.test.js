@@ -12,8 +12,6 @@ const { productUpdatedFromModel } = require('../mocks/productsService.mock');
 
 describe('Test - Products Middleware:', function () {
   it('should return an object with status 400 after trying to create a product with invalid `name`', async function () {
-    sinon.stub(productsModel, 'productIdExistsInDB').resolves(); // O que eu deveria colocar aqui?
-
     const name = null;
     const req = { body: { name } };
     const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
@@ -28,8 +26,6 @@ describe('Test - Products Middleware:', function () {
   });
 
   it('should return an object with status 422 after trying to create a product with less than 5 characters for `name`', async function () {
-    sinon.stub(productsModel, 'productIdExistsInDB').resolves(); // O que eu deveria colocar aqui?
-
     const name = 'Bill';
     const req = { body: { name } };
     const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
