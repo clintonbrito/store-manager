@@ -41,20 +41,14 @@ const salesByIdNotFoundMock = {
   data: { message: 'Sale not found' },
 };
 
-const saleCreatedFromDB = [[
-  {
-    fieldCount: 0,
-    affectedRows: 1,
-    insertId: 0,
-    info: '',
-    serverStatus: 2,
-    warningStatus: 0,
-  },
-], []];
+const saleCreatedFromDB = [[{ insertId: 1 }], []];
+
+const saleIdCreated = [[{ insertId: 1 }], []];
 
 module.exports = {
   salesMock,
   salesByIdMock,
   salesByIdNotFoundMock,
   saleCreatedFromDB,
+  saleIdCreated,
 };
