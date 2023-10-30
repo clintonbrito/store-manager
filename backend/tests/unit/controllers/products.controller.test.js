@@ -7,7 +7,7 @@ const { expect } = chai;
 
 const productsController = require('../../../src/controllers/products.controller');
 const productsService = require('../../../src/services/products.service');
-const { getAllProductsFromService, getProductByIdFromService, productInvalidFromService, productCreatedFromService, productUpdatedFromService } = require('../mocks/productsController.mock');
+const { getAllProductsFromService, getProductByIdFromService, productInvalidFromService, productCreatedFromService } = require('../mocks/productsController.mock');
 
 describe('Test - Products Controller:', function () {
   it('should return all products', async function () {
