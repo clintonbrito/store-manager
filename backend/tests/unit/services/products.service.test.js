@@ -8,7 +8,7 @@ const { expect } = require('chai');
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
 const { getProductByIdFromModel, getAllProductsFromDB, productCreatedFromModel } = require('../mocks/productsModel.mock');
-const { productUpdatedOkFromModel } = require('../mocks/productsService.mock');
+const { productUpdatedFromModel } = require('../mocks/productsService.mock');
 
 describe('Test - Products Service:', function () {
   it('should return all products', async function () {
@@ -21,7 +21,7 @@ describe('Test - Products Service:', function () {
     expect(productsServiceResponse).to.be.deep.equal(expectedResult);
   });
 
-  it('should return a product by id if productId exist', async function () {
+  it('should return a product by id if productId exists', async function () {
     sinon.stub(productsModel, 'getById').resolves(getProductByIdFromModel);
 
     const productId = 2;
@@ -32,7 +32,7 @@ describe('Test - Products Service:', function () {
     expect(productsByIdServiceResponse).to.be.deep.equal(expectedResult);
   });
 
-  it('should return 404 status and message `Product not found` if productId not exist', async function () {
+  it('should return 404 status and message `Product not found` if productId does not exist', async function () {
     sinon.stub(productsModel, 'getById').resolves(undefined);
 
     const productId = 9999;
@@ -44,26 +44,26 @@ describe('Test - Products Service:', function () {
   });
 
   it('should return an object with status 201 after create a new product', async function () {
-    // estou confundindo toda hora o que colocar dentro do "resolves"
     sinon.stub(productsModel, 'create').resolves(productCreatedFromModel);
 
     const name = 'Pílulas de Nanicolina';
     const productCreated = await productsService.create(name);
     // console.log(productCreated);
+
     const expectedResult = { status: 201, data: productCreatedFromModel };
 
     expect(productCreated).to.be.deep.equal(expectedResult);
   });
 
-  it('should return an object with status 200 after update an existing product', async function () {
-    sinon.stub(productsModel, 'update').resolves(productUpdatedOkFromModel);
+  it('should return an object with status 200 after updating an existing product', async function () {
+    sinon.stub(productsModel, 'update').resolves(productUpdatedFromModel);
 
     const name = 'Laço da Verdade';
     const id = 3;
-
     const productUpdated = await productsService.update(name, id);
     // console.log(productCreated);
-    const expectedResult = { status: 200, data: productUpdatedOkFromModel };
+
+    const expectedResult = { status: 200, data: productUpdatedFromModel };
 
     expect(productUpdated).to.be.deep.equal(expectedResult);
   });

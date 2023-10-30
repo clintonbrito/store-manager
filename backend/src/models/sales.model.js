@@ -8,6 +8,7 @@ const getAll = async () => {
     ON S.id = SP.sale_id
     ORDER BY sale_id, product_id;`;
   const [sales] = await connection.execute(query);
+  // console.log(camelize(sales));
   return camelize(sales);
 };
 
@@ -19,6 +20,8 @@ const getById = async (id) => {
     WHERE SP.sale_id = ?
     ORDER BY sale_id, product_id;`;
   const [saleId] = await connection.execute(query, [id]);
+  // console.log(saleId);
+
   return camelize(saleId);
 };
 
@@ -36,7 +39,7 @@ const create = async (saleId, productId, quantity) => {
   const query = 'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);';
 
   const newSale = await connection.execute(query, [saleId, productId, quantity]);
-  // console.log(newSale);
+  console.log(camelize(newSale));
 
   return camelize(newSale);
 };
