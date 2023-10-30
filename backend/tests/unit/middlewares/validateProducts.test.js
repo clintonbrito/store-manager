@@ -8,7 +8,7 @@ const { expect } = require('chai');
 const productsModel = require('../../../src/models/products.model');
 const validateProducts = require('../../../src/middlewares/validateProducts');
 const { productInvalidFromModel } = require('../mocks/productsModel.mock');
-const { productUpdatedOkFromModel } = require('../mocks/productsService.mock');
+const { productUpdatedFromModel } = require('../mocks/productsService.mock');
 
 describe('Test - Products Middleware:', function () {
   it('should return an object with status 400 after trying to create a product with invalid `name`', async function () {
@@ -76,7 +76,7 @@ describe('Test - Products Middleware:', function () {
   });
 
   it('should return an object with status 200 after trying to update an existing product', async function () {
-    sinon.stub(productsModel, 'productIdExistsInDB').resolves(productUpdatedOkFromModel);
+    sinon.stub(productsModel, 'productIdExistsInDB').resolves(productUpdatedFromModel);
 
     const id = 3;
     const name = 'Laço da Verdade';
