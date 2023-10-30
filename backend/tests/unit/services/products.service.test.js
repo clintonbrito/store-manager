@@ -8,6 +8,7 @@ const { expect } = require('chai');
 const productsModel = require('../../../src/models/products.model');
 const productsService = require('../../../src/services/products.service');
 const { getProductByIdFromModel, getAllProductsFromDB, productCreatedFromModel } = require('../mocks/productsModel.mock');
+const { productUpdatedOkFromModel } = require('../mocks/productsService.mock');
 
 describe('Test - Products Service:', function () {
   it('should return all products', async function () {
@@ -52,6 +53,19 @@ describe('Test - Products Service:', function () {
     const expectedResult = { status: 201, data: productCreatedFromModel };
 
     expect(productCreated).to.be.deep.equal(expectedResult);
+  });
+
+  it('should return an object with status 200 after update an existing product', async function () {
+    sinon.stub(productsModel, 'update').resolves(productUpdatedOkFromModel);
+
+    const name = 'Laço da Verdade';
+    const id = 3;
+
+    const productUpdated = await productsService.update(name, id);
+    // console.log(productCreated);
+    const expectedResult = { status: 200, data: productUpdatedOkFromModel };
+
+    expect(productUpdated).to.be.deep.equal(expectedResult);
   });
 
   afterEach(function () {

@@ -23,6 +23,11 @@ const productCreated = {
   name: 'Laço da Verdade',
 };
 
+const productUpdated = {
+  id: 3,
+  name: 'Laço da Verdade',
+};
+
 const getAllProductsFromService = {
   status: 200,
   data: products,
@@ -43,9 +48,20 @@ const productCreatedFromService = {
   data: productCreated,
 };
 
+// const productInvalidCreatedFromService = {
+//   status: 201,
+//   data: productCreated,
+// };
+
+const productUpdatedFromService = {
+  status: 200,
+  data: productUpdated,
+};
+
 module.exports = {
   getAllProductsFromService,
   getProductByIdFromService,
   productInvalidFromService,
   productCreatedFromService,
+  productUpdatedFromService,
 };

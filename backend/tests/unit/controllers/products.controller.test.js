@@ -7,7 +7,7 @@ const { expect } = chai;
 
 const productsController = require('../../../src/controllers/products.controller');
 const productsService = require('../../../src/services/products.service');
-const { getAllProductsFromService, getProductByIdFromService, productInvalidFromService, productCreatedFromService } = require('../mocks/productsController.mock');
+const { getAllProductsFromService, getProductByIdFromService, productInvalidFromService, productCreatedFromService, productUpdatedFromService } = require('../mocks/productsController.mock');
 
 describe('Test - Products Controller:', function () {
   it('should return all products', async function () {
@@ -67,9 +67,34 @@ describe('Test - Products Controller:', function () {
     expect(res.json).to.have.been.calledWith(productCreatedFromService.data);
   });
 
-  it('should return....', async function () {
-    expect();
-  });
+  // it('should return a message after trying to create an invalid product', async function () {
+  //   sinon.stub(productsService, 'create').resolves(productInvalidCreatedFromService);
+
+  //   const name = { name: 'Asdf' };
+
+  //   const req = { body: name };
+  //   const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+
+  //   await productsController.create(req, res);
+
+  //   expect(res.status).to.have.been.calledWith(201);
+  //   expect(res.json).to.have.been.calledWith(productCreatedFromService.data);
+  // });
+
+  // it('should return an object with `id` and `name` after update an existing product', async function () {
+  //   sinon.stub(productsService, 'update').resolves(productUpdatedFromService);
+
+  //   const id = 3;
+  //   const name = { name: 'Laço da Verdade' };
+
+  //   const req = { params: { id }, body: name };
+  //   const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+
+  //   await productsController.update(req, res);
+
+  //   expect(res.status).to.have.been.calledWith(200);
+  //   expect(res.json).to.have.been.calledWith(productCreatedFromService.data);
+  // });
 
   afterEach(function () {
     sinon.restore();

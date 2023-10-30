@@ -18,10 +18,6 @@ const create = async (req, res) => {
   const { name } = req.body;
   const product = await productsService.create(name);
 
-  if (product.message) {
-    return res.status(product.status).json({ message: product.message });
-  }
-
   return res.status(product.status).json(product.data);
 };
 
@@ -31,9 +27,9 @@ const update = async (req, res) => {
 
   const product = await productsService.update(name, id);
 
-  if (product.message) {
-    return res.status(product.status).json({ message: product.message });
-  }
+  // if (product.message) {
+  //   return res.status(product.status).json({ message: product.message });
+  // }
 
   return res.status(product.status).json(product.data);
 };
