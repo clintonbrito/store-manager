@@ -61,7 +61,7 @@ describe('Test - Sales Service:', function () {
     const saleCreated = await salesService.create(reqBody);
 
     const expectedResult = { status: 201, data: { id: saleIdFromModel, itemsSold: reqBody } };
-    console.log(saleCreated);
+    // console.log(saleCreated);
 
     expect(saleCreated).to.be.deep.equal(expectedResult);
   });

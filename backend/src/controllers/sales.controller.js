@@ -9,7 +9,7 @@ const getAll = async (_req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
   const sale = await salesService.getById(id);
-  // console.log(sale);
+  // console.log(sale.data);
 
   if (sale.message) {
     return res.status(sale.status).json({ message: sale.message });
@@ -21,10 +21,8 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   const arrayWithProducts = req.body;
   const sale = await salesService.create(arrayWithProducts);
+  // console.log(sale);
 
-  if (sale.message) {
-    return res.status(sale.status).json(sale.message);
-  }
   return res.status(sale.status).json(sale.data);
 };
 
